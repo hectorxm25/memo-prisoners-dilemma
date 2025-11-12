@@ -46,47 +46,6 @@ This project consists of three files:
 2. **`plot_results.py`**: Python script to generate visualizations
 3. **`README.md`**: This documentation file
 
-## Installation
-
-### Prerequisites
-
-1. **Python 3.12 or higher**
-   ```bash
-   python --version  # Check your version
-   ```
-
-2. **Create a virtual environment**
-   ```bash
-   python -m venv venv
-   ```
-
-3. **Activate the virtual environment**
-   - Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - Mac/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-4. **Install JAX** (required by Memo)
-   - Without GPU:
-     ```bash
-     pip install jax
-     ```
-   - With GPU: See [JAX installation guide](https://jax.readthedocs.io/en/latest/installation.html)
-
-5. **Install Memo**
-   ```bash
-   pip install memo-lang
-   ```
-
-6. **Install plotting dependencies**
-   ```bash
-   pip install matplotlib numpy
-   ```
-
 ## Usage
 
 ### Step 1: Run the Simulation
@@ -103,8 +62,6 @@ This will:
 - Simulate all 8 scenarios (described below)
 - Print detailed results to console
 - Save results to `simulation_results.json`
-
-**Expected runtime**: 1-5 minutes depending on your hardware
 
 ### Step 2: Generate Plots
 
@@ -198,69 +155,9 @@ After modifying parameters, re-run both scripts to see updated results.
 - **Near 0.5 probabilities**: Agent is uncertain/indifferent between options
 - **Extreme probabilities (near 0 or 1)**: Agent has strong preference
 
-## The Memo Model
-
-### How It Works
-
-The model uses Memo's probabilistic programming capabilities to implement recursive reasoning:
-
-1. **Agent Model**: Each agent computes expected utilities for cooperating vs. defecting
-2. **Opponent Model**: To compute expected utilities, agent must reason about opponent's likely action
-3. **Recursive Reasoning**: The opponent model itself requires reasoning about what the opponent thinks you'll do
-4. **Softmax Decision**: Final action chosen probabilistically based on utilities and β
-
-### Key Memo Features Used
-
-- `@memo` decorator: Defines probabilistic models
-- `chooses()`: Specifies probabilistic choice points
-- `wpp=`: Weighted probability for choices (softmax weights)
-- `infers()`: Performs probabilistic inference
-- JAX arrays: Efficient parallel computation
-
-## Troubleshooting
-
-### "Module 'memo' not found"
-- Make sure you installed `memo-lang` not `memo`: `pip install memo-lang`
-- Verify virtual environment is activated
-
-### "simulation_results.json not found"
-- Run `python prisoners_dilemma.py` before `python plot_results.py`
-
-### JAX errors on Mac
-- If you have an ARM Mac (M1/M2), ensure you installed ARM-compatible Python
-- See [Memo FAQ](https://github.com/kach/memo#faq) for Mac-specific issues
-
-### Numerical stability warnings
-- If you see unexpected zeros or infinities, you may need to adjust the beta values
-- Try values between 0.1 and 20 for stability
-
-## Extensions and Further Work
-
-### Possible Modifications
-
-1. **Grid Search**: Vary β values continuously to see full cooperation landscape
-2. **Different Beliefs**: Allow agents to have different beliefs about each other
-3. **Asymmetric Payoffs**: Change payoff matrix to be different for each player
-4. **Repeated Games**: Extend to multiple rounds (requires different Memo structure)
-5. **More Players**: Extend to N-player prisoner's dilemma
-
-### For Your Mini Project
-
-Consider exploring:
-- How does the cooperation probability change with β values in between 0.5 and 10?
-- What happens with more extreme β values (0.1, 0.01, 50, 100)?
-- How do results compare to human behavioral data?
-- Can you predict which scenarios lead to mutual cooperation?
-
 ## References
 
 1. Jara-Ettinger, J., Gweon, H., Schulz, L. E., & Tenenbaum, J. B. (2020). The Naive Utility Calculus as a unified, quantitative framework for action understanding. *Cognitive Psychology, 123*, 101334.
-
-2. Memo Language Documentation: https://github.com/kach/memo
-
-3. Axelrod, R. (1984). *The Evolution of Cooperation*. Basic Books.
-
-4. Rapoport, A., & Chammah, A. M. (1965). *Prisoner's Dilemma*. University of Michigan Press.
 
 ## License
 
@@ -270,7 +167,4 @@ This code is provided for educational purposes as part of a computational cognit
 
 For questions about Memo, see the [Memo GitHub repository](https://github.com/kach/memo) or consult the Handbook.pdf in the Memo repository.
 
----
-
-**Note**: This implementation demonstrates recursive reasoning about rationality in strategic decision-making. The model captures how agents' beliefs about each other's rationality levels influence their own choices, even when those beliefs may not match reality.
-
+For questions about this project, reach out at hectorxm@mit.edu or martinez.hx@gmail.com.
